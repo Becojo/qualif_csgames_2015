@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Horaire</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <style>
+  body {
+    font-family: "Open Sans";
+  }
+
+  .erreur {
+    padding: 20px;
+  }
+
+  .erreur.warning {
+    background-color: yellow;
+  }
+
+  .erreur.error {
+    background-color: #c00;
+    color: white;
+  }
+
+  td.error {
+    background-color: #faa;
+  }
+
+  nav {
+    padding: 2em 0;
+    font-size: 1.2em;
+    font-weight: bold;
+
+  }
+
+  nav a {
+    margin-right: 1em;
+  }
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <%= link_to('Participants', controller: :participants, action: :index) %>
+  <%= link_to('Competitions', controller: :competitions, action: :index) %>
+  <%= link_to('Horaire', controller: :horaire, action: :index) %>
+  <%= link_to('Importation', controller: :importer, action: :index) %>
+</nav>
+
+<% flash.each do |k, v| %>
+  <p class="erreur <%= k %>"><%= v %></p>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

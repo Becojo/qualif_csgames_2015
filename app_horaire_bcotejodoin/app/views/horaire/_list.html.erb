@@ -1,0 +1,14 @@
+<ul style="padding: 0; list-style: none">
+  <% competitions.each do |competition| %>
+
+  <li>
+    <%= link_to competition.name, competition %>
+
+    <ul>
+      <% competition.assignments.map(&:participant).each do |p| %>
+      <li><%= link_to p.name, p %></li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>

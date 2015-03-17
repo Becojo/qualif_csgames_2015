@@ -1,0 +1,29 @@
+<h1>Horaire</h1>
+
+<table border="1">
+  <tr>
+    <th></th>
+    <th>Friday</th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </tr>
+  <tr>
+    <td>Morning</td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Friday']['Morning'] }  %></td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Saturday']['Morning'] }  %></td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Sunday']['Morning'] }  %></td>
+  </tr>
+  <tr>
+    <td>Afternoon</td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Friday']['Afternoon'] }  %></td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Saturday']['Afternoon'] }  %></td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Sunday']['Afternoon'] }  %></td>
+  </tr>
+  <tr>
+    <td>Evening</td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Friday']['Evening'] }  %>
+    </td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Saturday']['Evening'] }  %></td>
+    <td><%= render partial: 'horaire/list', locals: { competitions: @horaire['Sunday']['Evening'] }  %></td>
+  </tr>
+</table>

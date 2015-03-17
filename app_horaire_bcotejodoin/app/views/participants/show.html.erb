@@ -1,0 +1,69 @@
+<% if @conflit %>
+  <p class="erreur error">
+    L'horaire de ce participant contient des conflits
+  </p>
+<% end %>
+
+<% if @assigned.size > 4 %>
+  <p class="erreur error">
+    Le participant participe à plus de quatre compétitions
+  </p>
+<% end %>
+
+<h1>Participants</h1>
+
+<h2><%= @participant.name %></h2>
+
+<p>
+  <b>Indice de satisfaction</b>: <%= @participant.score %> points.<br/>
+  <small>Une préférence statisfaite: +2 points sinon -1 point</small>
+</p>
+
+<p id="notice"><%= notice %></p>
+
+<h3>Préférences</h3>
+<ol>
+  <% @prefered.each do |prefered| %>
+    <li><%= link_to "#{prefered.name} (#{prefered.date} #{prefered.time})", prefered %> <%= prefered.is_satisfied %></li>
+  <% end %>
+</ol>
+
+<h3>Horaire</h3>
+<table border="1">
+  <tr>
+    <th></th>
+    <th>Friday</th>
+    <th>Saturday</th>
+    <th>Sunday</th>
+  </tr>
+  <tr>
+    <td>Morning</td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Friday']['Morning'] }  %></td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Saturday']['Morning'] }  %></td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Sunday']['Morning'] }  %></td>
+  </tr>
+  <tr>
+    <td>Afternoon</td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Friday']['Afternoon'] }  %></td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Saturday']['Afternoon'] }  %></td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Sunday']['Afternoon'] }  %></td>
+  </tr>
+  <tr>
+    <td>Evening</td>
+    <td class="<%= @horaire['Friday']['Evening'].size > 1 ? 'error' : '' %>"><%= render partial: 'competitions/list', locals: { competitions: @horaire['Friday']['Evening'] }  %></td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Saturday']['Evening'] }  %></td>
+    <td><%= render partial: 'competitions/list', locals: { competitions: @horaire['Sunday']['Evening'] }  %></td>
+  </tr>
+</table>
+
+<h3>Assigner à une compétition</h3>
+<p>
+  <%= form_tag({action: :create, controller: :assignments}) do %>
+    <%= collection_select nil, :competition_id, Competition.all, :id, :name %>
+    <%= hidden_field_tag(:participant_id, @participant.id) %>
+    <%= submit_tag "Assigner" %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_participant_path(@participant) %> |
+<%= link_to 'Back', participants_path %>

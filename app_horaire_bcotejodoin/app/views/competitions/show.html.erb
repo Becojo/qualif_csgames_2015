@@ -1,0 +1,35 @@
+<% if @competition.assignments.size < 3 %>
+  <p class="erreur error">
+    Cette compétition a moins de trois participants.
+  </p>
+<% end %>
+
+<h1>Compétitions</h1>
+<h2><%= @competition.name %></h2>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= @competition.date %> <%= @competition.time %>
+</p>
+
+<h3>Participants</h3>
+<ul>
+  <% @competition.assignments.each do |a| %>
+  <li>
+    <%= link_to a.participant.name, a.participant %>
+  </li>
+  <% end %>
+</ul>
+
+<h3>Participants désirant participer</h3>
+<ul>
+  <% @suggestions.each do |a| %>
+  <li>
+    <%= link_to a.participant.name, a.participant %> (Préférence: <%= a.index + 1 %>)
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'Back', competitions_path %>

@@ -1,0 +1,5 @@
+<h1>Importer des participants</h1>
+<%= form_tag({action: :create, controller: :importer}, multipart: true) do %>
+  <%= file_field_tag 'upload' %>
+  <input type="submit"/>
+<% end %>

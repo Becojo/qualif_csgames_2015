@@ -1,0 +1,9 @@
+<ul style="padding: 0; list-style: none">
+  <% competitions.each do |competition| %>
+
+  <li>
+    <%= link_to "#{competition.name}", competition %> <%= competition.is_satisfied%>
+  </li>
+
+  <% end %>
+</ul>
